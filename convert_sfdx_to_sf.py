@@ -1,9 +1,11 @@
 import sys
 
 def convert_command(sfdx_command):
-    # Replace -u with -o
-    sfdx_command = sfdx_command.replace(" -u ", " -o ")
-
+    # Arguement replacements
+    sfdx_command = sfdx_command.replace(" -u ", " --target-org ")
+    sfdx_command = sfdx_command.replace(" -v ", " --target-dev-hub ")
+    sfdx_command = sfdx_command.replace(" --forceoverwrite ", " --ignore-conflicts ")
+    
     # Dictionary to map sfdx commands to sf commands
     command_map = {
         "alias:set": "alias set",
@@ -69,6 +71,7 @@ def convert_command(sfdx_command):
         "force:source:status": "project deploy preview",
         "force:source:deploy:report": "project deploy report",
         "force:source:deploy": "project deploy start",
+        "force:source:push": "project deploy start",
         "force:project:create": "project generate",
         "force:source:manifest:create": "project generate manifest",
         "force:source:ignored:list": "project list ignored",
